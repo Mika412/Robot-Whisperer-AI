@@ -1,7 +1,7 @@
 <script lang="ts">
   import { PowerOff, Settings, Share2, Check } from "@lucide/svelte";
   import { modalStore } from "$lib/stores/modalStore.svelte";
-  import { connectionStatus } from "$lib/stores/rosStore";
+  import { connectionStatus, connect } from "$lib/stores/rosStore";
   import SettingsModal from "$lib/components/modals/SettingsModal.svelte";
 </script>
 
@@ -16,6 +16,7 @@
     </button>
   {:else}
 	  <button
+        onclick={() => connect()}
         class="h-10 flex-grow flex items-center justify-center gap-2.5 text-sm px-2.5 rounded-lg font-semibold transition-colors bg-red-500/20 text-red-300 hover:bg-red-500/30"
     >
         <PowerOff size={16} /> Disconnected
