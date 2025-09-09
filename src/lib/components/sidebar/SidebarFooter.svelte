@@ -1,0 +1,38 @@
+<script lang="ts">
+  import { PowerOff, Settings, Share2, Check } from "@lucide/svelte";
+  import { modalStore } from "$lib/stores/modalStore.svelte";
+  import { connectionStatus } from "$lib/stores/rosStore";
+  import SettingsModal from "$lib/components/modals/SettingsModal.svelte";
+</script>
+
+<div
+  class="flex-shrink-0 p-2 pt-4 border-t border-border flex items-center gap-2"
+>
+  {#if $connectionStatus.connected}
+	<button
+        class="h-10 flex-grow flex items-center justify-center gap-2.5 text-sm px-2.5 rounded-lg font-semibold transition-colors bg-green-500/20 text-green-400 hover:bg-green-500/30"
+    >
+        <Check size={16} /> Connected
+    </button>
+  {:else}
+	  <button
+        class="h-10 flex-grow flex items-center justify-center gap-2.5 text-sm px-2.5 rounded-lg font-semibold transition-colors bg-red-500/20 text-red-300 hover:bg-red-500/30"
+    >
+        <PowerOff size={16} /> Disconnected
+    </button>
+  {/if}
+
+  <button
+    onclick={() => modalStore.open(SettingsModal)}
+    title="Settings"
+    class="h-10 w-10 flex items-center justify-center rounded-lg bg-bg-main border border-border hover:bg-bg-hover text-text-dimmer hover:text-text-main transition-colors"
+  >
+    <Settings size={16} />
+  </button>
+  <button
+    title="Import/Export"
+    class="h-10 w-10 flex items-center justify-center rounded-lg bg-bg-main border border-border hover:bg-bg-hover text-text-dimmer hover:text-text-main transition-colors"
+  >
+    <Share2 size={16} />
+  </button>
+</div>
