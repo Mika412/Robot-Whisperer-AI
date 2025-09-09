@@ -1,5 +1,6 @@
 import { writable, derived, get } from "svelte/store";
 import { requests, updateRequest } from "$lib/stores/requestStore";
+import { settings } from "$lib/stores/settingsStore.svelte";
 import { WSFoxgloveProvider } from "$lib/ros/wsFoxgloveProvider";
 import type { TopicInfo, SchemaRecord } from "$lib/ros/types";
 import type { RosRequest } from "$lib/db";
@@ -22,11 +23,11 @@ provider.setEvents({
  * Connects the shared provider to a WebSocket URL.
  * @param url The WebSocket URL of the Foxglove bridge.
  */
-export async function connect(url: string) {
+export async function connect() {
     if (get(connectionStatus).connected) {
         await provider.disconnect();
     }
-    await provider.connect({ url });
+    await provider.connect({ url: settings.websocketUrl });
 }
 
                 // this.events.onSchemas?.(payload as Array<{ messageType: string; definition: string; encoding: string; schema: string, source: "foxglove" }>);

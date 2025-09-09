@@ -17,5 +17,6 @@ function getFromStorage(key: string, defaultValue: any) {
 }
 
 export let settings = $state(getFromStorage('settings', {
-    theme: 'dark'
+    theme: 'dark',
+    websocketUrl: 'ws://localhost:8765'
 }));
